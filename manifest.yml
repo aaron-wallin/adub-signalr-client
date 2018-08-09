@@ -1,0 +1,9 @@
+---
+applications:
+- name: adub-signalr-client
+  buildpack: dotnet_core_buildpack
+  health-check-type: process
+  memory: 512M
+  instances: 1
+  routes:
+  - route: https://adub-signalr-client.apps.pcf.sandbox.cudirect.com
