@@ -6,11 +6,16 @@
 //
 // See Es5-chat.js for a Babel transpiled version of the following code:
 
+//const connection = new signalR.HubConnectionBuilder()
+//    .withUrl("https://adub-signalr-sample.apps.pcf.sandbox.cudirect.com/chatHub", {
+//        skipNegotiation: true,
+//        transport: signalR.HttpTransportType.WebSockets
+//    })
+//    .configureLogging(signalR.LogLevel.Information)
+//    .build();
+
 const connection = new signalR.HubConnectionBuilder()
-    .withUrl("https://adub-signalr-sample.apps.pcf.sandbox.cudirect.com/chatHub", {
-        skipNegotiation: true,
-        transport: signalR.HttpTransportType.WebSockets
-    })
+    .withUrl("https://adub-signalr-sample.apps.pcf.sandbox.cudirect.com/chatHub")
     .configureLogging(signalR.LogLevel.Information)
     .build();
 
