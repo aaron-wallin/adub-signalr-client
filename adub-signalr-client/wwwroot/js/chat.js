@@ -15,9 +15,11 @@
 //    .build();
 
 const connection = new signalR.HubConnectionBuilder()
-    .withUrl("https://adub-signalr-sample.apps.pcf.sandbox.cudirect.com/chatHub")
+    .withUrl("https://adub-signalr-hub.apps.pcf.nonprod.cudirect.com/chatHub")
     .configureLogging(signalR.LogLevel.Information)
     .build();
+
+
 
 connection.on("ReceiveMessage", (user, message) => {
     const msg = message.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
@@ -44,6 +46,13 @@ connection.start().catch(err => console.error(err.toString()));
 document.getElementById("sendButton").addEventListener("click", event => {
     const user = document.getElementById("userInput").value;
     const message = document.getElementById("messageInput").value;
-    connection.invoke("SendMessage", user, message).catch(err => console.error("UNABLE TO SEND MESSAGE: " + err.toString()));
+    const from = document.getElementById("userName").value;
+    connection.invoke("SendMessage", user, from, message).catch(err => console.error("UNABLE TO SEND MESSAGE: " + err.toString()));
+    event.preventDefault();
+});
+
+document.getElementById("registerButton").addEventListener("click", event => {
+    const user = document.getElementById("userName").value;
+    connection.invoke("RegisterUser", user).catch(err => console.error("UNABLE TO SEND MESSAGE: " + err.toString()));
     event.preventDefault();
 });
